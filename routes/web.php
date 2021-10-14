@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('testPage');
 });
+
+Route::get('/test', [TestController::class, 'show']);
+
+Route::get('auth/steam', [AuthController::class, "redirectToSteam"])->name('auth.steam');
+Route::get('auth/steam/handle', [AuthController::class, "handle"])->name('auth.steam.handle');
+
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');

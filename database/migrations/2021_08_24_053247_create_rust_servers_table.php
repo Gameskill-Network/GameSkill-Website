@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateRustServersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('rust_servers', function (Blueprint $table) {
             $table->id();
-            $table->string('username');
-            $table->string('avatar');
-            $table->string('steamid');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string("name")->unique();
+            $table->ipAddress("ip");
+            $table->integer("port");
+            $table->integer("rcon_port");
         });
     }
 
@@ -30,6 +29,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('rust_servers');
     }
 }
